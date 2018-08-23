@@ -73,7 +73,7 @@ else
 
 		
 	
-     ///	pConfig->writeInteger("ROLLNUMBER", iRollNumber);
+	pConfig->writeInteger("ROLLNUMBER", 7);
 	}
 
 delete pConfig;

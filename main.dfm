@@ -16,19 +16,19 @@ object Form1: TForm1
   object myLabel: TLabel
     Left = 99
     Top = 88
-    Width = 117
+    Width = 3
     Height = 13
   end
   object myLabel2: TLabel
     Left = 102
     Top = 120
-    Width = 114
+    Width = 3
     Height = 13
   end
   object myLabel3: TLabel
     Left = 110
     Top = 184
-    Width = 90
+    Width = 3
     Height = 13
   end
 end
