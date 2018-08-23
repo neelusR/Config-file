@@ -74,6 +74,8 @@ else
 		
 	
 	pConfig->writeInteger("ROLLNUMBER", 7);
+	pConfig->writeBoolean("TEST", false);
+	pConfig->writeString("BARCODENUMBER", "new string");
 	}
 
 delete pConfig;

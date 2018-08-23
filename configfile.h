@@ -41,9 +41,9 @@ class DConfigFile
 	bool    readInteger(char * strVariable, int * piValue, int iDefault);
 	bool    readBoolean(char * strVariable, bool * pbValue, bool bDefault);
      
-       //	bool    writeString(char * strVariable, char * strValue);
+	bool    writeString(char * strVariable, char * strValue);
 	bool    writeInteger(char * strVariable, int iValue);
-       //	bool    writeBoolean(char * strVariable, bool bValue);
+       	bool    writeBoolean(char * strVariable, bool bValue);
        
 //    protected:
 	bool    bFileOpen;
