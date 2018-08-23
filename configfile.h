@@ -1,5 +1,4 @@
 //===========================================================================
-// Copyright EasyLogic 2006
 //---------------------------------------------------------------------------
 // DConfigFile -- Read and save a configuratie bestand
 //---------------------------------------------------------------------------
@@ -41,11 +40,11 @@ class DConfigFile
 	bool    readString(char * strVariable, char * strValue, char * strDefault);
 	bool    readInteger(char * strVariable, int * piValue, int iDefault);
 	bool    readBoolean(char * strVariable, bool * pbValue, bool bDefault);
-     /*
-	bool    writeString(char * strVariable, char * strValue);
+     
+       //	bool    writeString(char * strVariable, char * strValue);
 	bool    writeInteger(char * strVariable, int iValue);
-	bool    writeBoolean(char * strVariable, bool bValue);
-       */
+       //	bool    writeBoolean(char * strVariable, bool bValue);
+       
 //    protected:
 	bool    bFileOpen;
 
@@ -54,9 +53,9 @@ class DConfigFile
 	HANDLE  hFileHandle;
 	BYTE *  pBuffer;
 	DWORD   dwSize;
-        char	storeFileName[256];
+	char	storeFileName[256];
 	bool    readLine(char * strLine, char * strValue, DWORD * pdwStartPosition);
-	bool    writeLine(char * strLine, DWORD dwStartPosition, DWORD dwEndPosition);
+	bool    writeLine(char * strNewValue,  unsigned long dwEndPosition);
 
     private:
 

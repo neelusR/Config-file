@@ -1,5 +1,4 @@
 //===========================================================================
-// Copyright EasyLogic 2006
 //---------------------------------------------------------------------------
 // configFile 
 //---------------------------------------------------------------------------
@@ -224,39 +223,6 @@ while (readLine(strLine, strValueFound, &dwPosition))	//get next string variable
 		}
 	}
 
-/*	//get variable
-	for (iCounter=0; iCounter < 255;  iCounter++)  //find separator
-		{
-		if (strLine[iCounter] == ' ' || strLine[iCounter] == '=')
-			break;
-		else
-			CTemp1[iCounter] = strLine[iCounter];
-		}
-	CTemp1[iCounter] = 0;
-
-	if (strcmp(CTemp1, strVariable) == 0)	//check variable
-		{
-		for ( ; iCounter < 255;  iCounter++)  //find separator
-			{
-			if (strLine[iCounter] != '=' && strLine[iCounter] != ' ')
-				break;
-			}
-				
-		for ( ; iCounter < 255;  iCounter++)  //find separator
-			{
-			
-			CTemp2[iCounter] = strLine[iCounter];
-			if (strLine[iCounter] == 0)
-					break;
-
-			}
-	
-			strcpy(strValue, CTemp2);  //Returns the AnsiString converted to null-terminated character array.
-            return true;
-            }
-        }
-	}
-*/
 
 
 // not found
@@ -273,9 +239,6 @@ bool DConfigFile :: readInteger  ( char * strVariable,  int *  piValue,  int    
 char            strLine[256];
 char            strValueFound[256];
 unsigned long           dwPosition = 0;
-//AnsiString      CTemp1;
-//AnsiString      CTemp2;
-//AnsiString      CCompare;
 int             iPos;
 
 while (readLine(strLine, strValueFound, &dwPosition))	//get next string variable, returns string in strLine, and new pos in dwPosition
@@ -288,32 +251,6 @@ while (readLine(strLine, strValueFound, &dwPosition))	//get next string variable
 	}
 
 
-/*
-CCompare = strVariable;
-// search for the string
-while (readLine(strLine, &dwPosition))
-	{
-	// check the var
-    CTemp1 = strLine;
-    iPos = CTemp1.AnsiPos("=");
-    if (iPos > 1)
-		{
-	    CTemp2 = CTemp1.SubString(iPos + 1, 256);
-        CTemp1 = CTemp1.SetLength(iPos - 1);
-        CTemp2 = CTemp2.Trim();
-        CTemp1 = CTemp1.Trim();
-	    if (CCompare == CTemp1)
-			{
-			if (((CTemp2[1] >= '0') && (CTemp2[1] <= '9')) || (CTemp2[1] == '-') || (CTemp2[1] == '+'))
-				{
-				*piValue = CTemp2.ToInt();
-				return true;
-				}
-			}
-	    }
-	}
-
-*/
 // not found
 *piValue = iDefault;
 return false;
@@ -327,9 +264,6 @@ bool DConfigFile :: readBoolean   ( char * strVariable,  bool * pbValue,   bool 
 char            strLine[256];
 char            strValueFound[256];
 unsigned long           dwPosition = 0;
-//AnsiString      CTemp1;
-//AnsiString      CTemp2;
-//AnsiString      CCompare;
 int             iPos;
 
 
@@ -352,38 +286,6 @@ while (readLine(strLine, strValueFound, &dwPosition))	//get next string variable
 		}
 	}
 
-/*
-CCompare = strVariable;
-// search for the string
-while (readLine(strLine, &dwPosition))
-	{
-	// check the var
-    CTemp1 = strLine;
-    iPos = CTemp1.AnsiPos("=");
-    if (iPos > 1)
-	    {
-        CTemp2 = CTemp1.SubString(iPos + 1, 256);
-        CTemp1 = CTemp1.SetLength(iPos - 1);
-        CTemp2 = CTemp2.Trim();
-        CTemp1 = CTemp1.Trim();
-	    CTemp2 = CTemp2.UpperCase();
-	    if (CCompare == CTemp1)
-			{
-			if ((CTemp2 == "TRUE") ||(CTemp2 == "YES") || (CTemp2 == "Y") || (CTemp2 == "T"))
-				{
-				*pbValue = true;
-				return true;
-				}
-			if ((CTemp2 == "FALSE") ||(CTemp2 == "NO") || (CTemp2 == "N") || (CTemp2 == "F"))
-				{
-                *pbValue = false;
-				return true;
-				}
-			}
-	    }
-	}
-
-*/
 
 // not found
 *pbValue = bDefault;
@@ -420,40 +322,13 @@ for (dwFirstChar = *pdwStartPosition, iLineCounter = 0;  dwFirstChar < dwSize;  
 		if (pBuffer[dwFirstChar] == '#')      // search for startChar
 			{
 			iState++;
-            }
+	    }
 		else if ((pBuffer[dwFirstChar] != 13) && (pBuffer[dwFirstChar] != 10))
 		    {                  // error, no CR and LF, search next line
 		    iState = 10;
 		    }
 		break;
 	    
-/*		case 1:
-		// start reading line
-		if ((bInString) &&  (pBuffer[dwFirstChar] == '"'))
-		    {					//end of string data detected
-		    bInString = false;
-		    }
-		else if ((!bInString) && (pBuffer[dwFirstChar] == '"'))
-		    {					//entry of string data detected
-		    bInString = true;
-		    }
-		else if ((!bInString) && (pBuffer[dwFirstChar] == ';'))
-		    {                               //end of variable definition
-		    strLine[iLineCounter] = 0;		//terminate string with zero
-		    *pdwStartPosition = dwFirstChar + 1;	//place new location pointer
-		    return true;
-		    }
-		else if (iLineCounter == 255)
-		    {		    // error, data string to long
-		    iState = 10;
-		    iLineCounter = 0;
-		    }
-		else		      //no error
-		    {               //place char in return buf and increase counter
-		    strLine[iLineCounter++] = pBuffer[dwFirstChar];
-		    }
-		break;
-*/
 		case 1:
 		// start reading line
 		if (iLineCounter == 255)
@@ -521,8 +396,8 @@ for (dwFirstChar = *pdwStartPosition, iLineCounter = 0;  dwFirstChar < dwSize;  
 return false;
 } // readLine
 
-/*
 
+/*
 //---------------------------------------------------------------------------
 // DConfigFile: writeString -- search for a certan string variable
 // returns true if success, 
@@ -568,7 +443,7 @@ while (readLine(strLine, &dwEndPosition))
 return false;
 } // writeString
 
-    
+  */  
 
 //---------------------------------------------------------------------------
 // DConfigFile: readInteger -- search for a certan integer variable
@@ -577,17 +452,30 @@ return false;
 bool DConfigFile :: writeInteger  ( char * strVariable,  int iValue )
 {
 char            strLine[256];
+char            strValueFound[256];
+char		strNewValue[256];
 unsigned long           dwBeginPosition, dwEndPosition = 0;
-AnsiString      CTemp1;
-AnsiString      CTemp2;
-AnsiString      CCompare;
-int             iPos, iSize;
+//AnsiString      CTemp1;
+//AnsiString      CTemp2;
+//AnsiString      CCompare;
+int             iPos, iOldSize, iNewSize;
 char	    tmpValue[256];
 
-CCompare = strVariable;
+//CCompare = strVariable;
 // search for the string
-while (readLine(strLine, &dwEndPosition))
+while (readLine(strLine, strValueFound, &dwEndPosition))
 	{
+	if (strcmp(strLine, strVariable) == 0)	//check if variable is found
+		{
+	 //	iOldSize = strlen (strValueFound);	
+		sprintf(strNewValue," %d;",iValue);
+	  //	writeLine (strVariable, strNewValue);
+	    //	iNewSize = strLen (strVariable);
+
+		writeLine ( strNewValue, dwEndPosition);
+
+		}
+/*		
 	// check the var
 	CTemp1 = strLine;
 	iPos = CTemp1.AnsiPos("=");       //Locates the position of a substring within an AnsiString.
@@ -606,12 +494,13 @@ while (readLine(strLine, &dwEndPosition))
 				return true;
 			}
 	    }
+  */
 	}
 
 return false;
 } // writeInteger
 
-
+/*
 //---------------------------------------------------------------------------
 // DConfigFile: readBoolean -- search for a certan Boolean variable
 // returns true if success, 
@@ -656,16 +545,21 @@ while (readLine(strLine, &dwEndPosition))
 return false;
 }//writeBoolean 
 
+*/
+
 //---------------------------------------------------------------------------
 // DConfigFile: writeLine -- writes a line to buffer
+//		writeLine ( strLine, strNewValue, iOldSize, iNewSize);
 //---------------------------------------------------------------------------
-bool DConfigFile :: writeLine  ( char * strLine,  unsigned long dwStartPosition, unsigned long dwEndPosition  )
+bool DConfigFile :: writeLine  ( char * strNewValue,  unsigned long dwEndPosition )
 {
-unsigned long   dwFirstChar, dwTmpSize,dwBytesWritten;
+unsigned long   dwFirstChar, dwTmpSize,dwBytesWritten, dwStartPosition;
 int     iLineCounter;
 long	iCounter;
 BYTE *  pTmpBuffer;	
 bool    bFail;
+int	iNewSize;
+int	iRealOldSize;
 
 bFail = false;
 
@@ -675,12 +569,49 @@ if (!bFileOpen)
 	// file not open
 	return false;
 	}
+iRealOldSize = 0;
+				   //get real size of old value
+for (dwFirstChar = dwEndPosition;  dwFirstChar > 0;  dwFirstChar--)
+	{                         //place first part of buffer
+	if (pBuffer[dwFirstChar] == '=')
+		break;
+	}
+dwFirstChar++;
+iRealOldSize = dwEndPosition - dwFirstChar;
 
-    
+ 
+iNewSize=StrLen(strNewValue);
+
 //create new buffer based on new string size
-dwTmpSize = dwSize + (StrLen(strLine) - (dwEndPosition - dwStartPosition ) );
+dwTmpSize = dwSize + (iNewSize - iRealOldSize );
 pTmpBuffer = new BYTE[dwTmpSize];
 
+
+//place old data
+for (iLineCounter = 0;  iLineCounter < dwFirstChar ;  iLineCounter++)
+	{                         //place first part of buffer
+	pTmpBuffer[iLineCounter] = pBuffer[iLineCounter];
+	}
+
+//place new data	
+for (iCounter = 0;  iCounter < iNewSize ;  iCounter++)
+	{                         
+	pTmpBuffer[iLineCounter+iCounter] = strNewValue[iCounter];
+	}
+iLineCounter += iCounter;
+
+//place 2nd part
+for ( ;  dwEndPosition < dwSize ;  dwEndPosition++)
+	{                         
+	pTmpBuffer[iLineCounter++] = pBuffer[dwEndPosition];
+	}
+	
+
+
+
+	
+
+/*
 for (dwFirstChar = 0, iLineCounter = 0;  dwFirstChar < dwSize && dwFirstChar < dwStartPosition ;  dwFirstChar++)
 	{                         //place first part of buffer
 	pTmpBuffer[iLineCounter++] = pBuffer[dwFirstChar];
@@ -697,7 +628,7 @@ else
 		{
 		pTmpBuffer[iLineCounter++] = pBuffer[dwFirstChar];
 		}
-
+ */
 	if (bFileOpen)				//close original file and buffer
 		{
 		CloseHandle(hFileHandle);
@@ -705,7 +636,19 @@ else
 		bFileOpen = false;
 		}
 
-	hFileHandle = CreateFileA(storeFileName,
+		
+//normal
+	hFileHandle = CreateFile(storeFileName,
+			     GENERIC_WRITE,
+			     FILE_SHARE_WRITE,
+			     NULL,
+			     OPEN_ALWAYS,
+			     0,
+			     NULL);
+ 
+  
+  /*	//special for embedded
+hFileHandle = CreateFile(TEXT("\\IPAQ File Store\\Tagreader\\config.cfg"),
 			     GENERIC_WRITE,
 			     FILE_SHARE_WRITE,
 			     NULL,
@@ -713,6 +656,8 @@ else
 			     0,
 			     NULL);
 
+     */
+			     
 	if (hFileHandle == INVALID_HANDLE_VALUE)
 		bFail = true;
 	else				//write new buffer to file
@@ -727,12 +672,12 @@ else
 		CloseHandle(hFileHandle);		
 		bFileOpen = false;    
 		}
-	}
+   //	}
 	
 
 if ( openTextFile(storeFileName) == false )
 	bFail = true;    
-  	
+	
 	
 delete[] pTmpBuffer;
 
@@ -743,4 +688,4 @@ else
 } // writeLine
 
 
-*/
+
