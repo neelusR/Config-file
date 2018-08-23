@@ -226,7 +226,7 @@ while (readLine(strLine, strValueFound, &dwPosition))	//get next string variable
 
 
 // not found
-strcpy(strValue, strDefault);
+    strValue = strDefault;
 return false;
 } // readString
 
